@@ -42,7 +42,7 @@ header {
 .nav-overlay a { text-decoration: none; color: #000; font-size: 2rem; font-weight: 900; letter-spacing: 0.2em; }
 
 /* Sub Navigation (YG Style) */
-.sub-nav-wrapper { border-bottom: 1px solid var(--border-light); sticky: top; top: var(--header-h); background: #fff; z-index: 1000; position: sticky; }
+.sub-nav-wrapper { border-bottom: 1px solid var(--border-light); position: sticky; top: var(--header-h); background: #fff; z-index: 1000; }
 .sub-nav {
     max-width: 800px; margin: 0 auto; list-style: none; padding: 0;
     display: flex; justify-content: center; gap: 40px;
@@ -69,14 +69,14 @@ main { padding-top: var(--header-h); }
 .hero-text-box { flex: 1; padding-left: 60px; }
 .main-name { font-size: clamp(3rem, 7vw, 5rem); font-weight: 900; margin: 0; }
 
-/* Tab: ABOUT */
-.concept-visual { display: flex; align-items: center; gap: 60px; }
+/* Tab: ABOUT & VISUALS */
+.concept-visual { display: flex; align-items: center; gap: 60px; margin-bottom: 100px; }
 .concept-visual img { width: 50%; box-shadow: 20px 20px 0 var(--main-purple); }
 .info-grid { margin-top: 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; border-top: 1px solid var(--border-light); padding-top: 30px; }
 .info-item span { font-size: 0.6rem; color: var(--main-purple); text-transform: uppercase; display: block; }
 
-/* Tab: VISUALS */
-.gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+.visual-title { margin-top: 100px; text-align: center; }
+.gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 40px;}
 .gallery-item img { width: 100%; border: 1px solid var(--border-light); }
 .gallery-item p { text-align: center; font-size: 0.7rem; color: var(--main-purple); margin-top: 10px; }
 
@@ -92,12 +92,6 @@ main { padding-top: var(--header-h); }
 /* Tab: DOWNLOAD */
 .dl-box { text-align: center; border: 1px solid var(--main-purple); padding: 100px 20px; }
 .btn-dl { display: inline-block; background: var(--main-purple); color: #fff; padding: 20px 80px; text-decoration: none; font-weight: 900; letter-spacing: 0.2em; }
-
-/* Portal index */
-.character-select { display: flex; justify-content: center; gap: 40px; padding: 100px 0; }
-.char-card { text-decoration: none; color: inherit; width: 300px; text-align: center; }
-.char-card img { width: 100%; filter: grayscale(100%); transition: 0.5s; border: 1px solid var(--border-light); }
-.char-card:hover img { filter: grayscale(0%); transform: translateY(-10px); }
 
 footer { text-align: center; padding: 80px; font-size: 0.6rem; color: #bbb; letter-spacing: 0.3em; }
 

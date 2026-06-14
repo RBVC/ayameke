@@ -39,14 +39,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function renderModelPage(data) {
     document.title = `${data.nameJP} | AYAMEKE`;
+    
+    // MAIN用
     document.getElementById('js-title-jp').innerHTML = data.nameJP.replace('カグラ', '<span class="purple">カグラ</span>');
     document.getElementById('js-title-en').innerText = data.enTitle;
     document.getElementById('js-hero-img').src = data.mainImg;
+
+    // ABOUT用
     document.getElementById('js-about-img').src = data.sacraImg;
     document.getElementById('js-about-text').innerText = data.aboutText;
-    document.getElementById('js-dl-link').href = data.downloadUrl;
-
-    // プロフィール情報
+    document.getElementById('js-en-name').innerText = data.nameEN.split(' ')[1].toUpperCase();
     document.getElementById('js-profile-grid').innerHTML = `
         <div class="info-item"><span>Birthday</span>${data.profile.birthday}</div>
         <div class="info-item"><span>Height</span>${data.profile.height}</div>
@@ -55,20 +57,23 @@ function renderModelPage(data) {
         <div class="info-item"><span>Eyes</span>${data.appearance.eyes}</div>
     `;
 
-    // ギャラリー
+    // VISUALS用（ABOUT内に統合済み）
     const gal = document.getElementById('js-gallery-grid');
     data.visuals.forEach(v => {
         gal.innerHTML += `<div class="gallery-item"><img src="${v.src}"><p>${v.label}</p></div>`;
     });
 
-    // 音声リスト
+    // VOICE用
     const list = document.getElementById('js-song-list');
     data.songs.forEach(s => {
         list.innerHTML += `<li class="track" data-src="${s.src}">${s.title}</li>`;
     });
 
+    // DOWNLOAD用
+    document.getElementById('js-dl-link').href = data.downloadUrl;
+
     initTabs();
-    if(typeof initAudioPlayer === 'function') initPlayer();
+    if(typeof initPlayer === 'function') initPlayer();
 }
 
 function initTabs() {
@@ -82,7 +87,7 @@ function initTabs() {
             sections.forEach(s => s.classList.remove('active'));
             tab.classList.add('active');
             document.getElementById(target).classList.add('active');
-            window.scrollTo(0, 0); // 切り替え時に上へ
+            window.scrollTo(0, 0); 
         };
     });
 }

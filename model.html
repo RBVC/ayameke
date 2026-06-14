@@ -4,22 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;700;900&display=swap" rel="stylesheet">
 </head>
 <body id="js-model-content">
-    <!-- common.js が header を注入します -->
 
     <div class="sub-nav-wrapper">
         <ul class="sub-nav">
             <li class="active" data-target="sec-main">MAIN</li>
             <li data-target="sec-about">ABOUT</li>
-            <li data-target="sec-visuals">VISUALS</li>
             <li data-target="sec-voice">VOICE</li>
             <li data-target="sec-download">DOWNLOAD</li>
         </ul>
     </div>
 
     <main>
-        <!-- MAIN -->
+        <!-- 1. MAIN: ヒーロー画面のみ -->
         <section id="sec-main" class="model-section active">
             <div class="hero-img-box"><img id="js-hero-img" src=""></div>
             <div class="hero-text-box">
@@ -28,7 +29,7 @@
             </div>
         </section>
 
-        <!-- ABOUT -->
+        <!-- 2. ABOUT: プロフィール + ビジュアル(ギャラリー) -->
         <section id="sec-about" class="model-section container">
             <div class="concept-visual">
                 <img id="js-about-img" src="">
@@ -36,18 +37,18 @@
                     <h2 class="section-label">ABOUT</h2>
                     <h3>Who is <span class="purple" id="js-en-name"></span>?</h3>
                     <p class="body-text" id="js-about-text"></p>
-                    <div class="info-grid" id="js-profile-grid"></div>
+                    <div class="info-grid" id="js-profile-info"></div>
                 </div>
             </div>
-        </section>
 
-        <!-- VISUALS -->
-        <section id="sec-visuals" class="model-section container">
-            <h2 class="section-label">VISUALS</h2>
+            <!-- ABOUTの下に続くVISUALS -->
+            <div class="visual-title">
+                <h2 class="section-label">VISUALS</h2>
+            </div>
             <div class="gallery-grid" id="js-gallery-grid"></div>
         </section>
 
-        <!-- VOICE -->
+        <!-- 3. VOICE -->
         <section id="sec-voice" class="model-section container">
             <h2 class="section-label">VOICE PREVIEW</h2>
             <div class="player-wrapper">
@@ -63,11 +64,17 @@
             </div>
         </section>
 
-        <!-- DOWNLOAD -->
+        <!-- 4. DOWNLOAD -->
         <section id="sec-download" class="model-section container">
             <div class="dl-box">
                 <h2 class="section-label">DOWNLOAD</h2>
                 <a id="js-dl-link" href="" class="btn-dl">DOWNLOAD .pth</a>
+                
+                <div style="margin-top: 60px; text-align: left; opacity: 0.6; font-size: 0.8rem;">
+                    <h3 class="section-label">GUIDELINE</h3>
+                    <p>・RVC以外の目的での使用禁止</p>
+                    <p>・特定の個人・団体を誹謗中傷する目的での使用を禁止します</p>
+                </div>
             </div>
         </section>
     </main>
@@ -75,6 +82,7 @@
     <script src="data.js"></script>
     <script src="common.js"></script>
     <script>
+        // プレイヤー再生機能
         function initPlayer() {
             const audio = document.getElementById('audio-element');
             const playBtn = document.getElementById('play-pause-btn');
