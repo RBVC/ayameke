@@ -40,20 +40,28 @@ document.addEventListener('DOMContentLoaded', () => {
 function renderModelPage(data) {
     document.title = `${data.nameJP} | AYAMEKE`;
     
-    // データ流し込み（IDの存在チェックを入れながら）
+    // 基本情報の埋め込み
     const nodes = {
-        'js-title-jp': () => document.getElementById('js-title-jp').innerHTML = data.nameJP.replace('カグラ', '<span class="purple">カグラ</span>'),
-        'js-title-en': () => document.getElementById('js-title-en').innerText = data.enTitle,
-        'js-hero-img': () => document.getElementById('js-hero-img').src = data.mainImg,
-        'js-about-img': () => document.getElementById('js-about-img').src = data.sacraImg,
-        'js-about-text': () => document.getElementById('js-about-text').innerText = data.aboutText,
-        'js-en-name': () => document.getElementById('js-en-name').innerText = data.nameEN.split(' ')[1].toUpperCase(),
-        'js-dl-link': () => document.getElementById('js-dl-link').href = data.downloadUrl
+        'js-title-jp': data.nameJP.replace('カグラ', '<span class="purple">カグラ</span>'),
+        'js-title-en': data.enTitle,
+        'js-hero-img': data.mainImg,
+        'js-about-img': data.sacraImg,
+        'js-about-text': data.aboutText,
+        'js-en-name': data.nameEN.split(' ')[1].toUpperCase(),
+        'js-dl-link': data.downloadUrl
     };
 
-    Object.keys(nodes).forEach(id => { if(document.getElementById(id)) nodes[id](); });
+    for (const [id, value] of Object.entries(nodes)) {
+        const el = document.getElementById(id);
+        if (el) {
+            if (id === 'js-title-jp') el.innerHTML = value;
+            else if (id === 'js-dl-link') el.href = value;
+            else if (id.includes('img')) el.src = value;
+            else el.innerText = value;
+        }
+    }
 
-    // プロフィール情報
+    // プロフィール
     const profileGrid = document.getElementById('js-profile-grid');
     if(profileGrid) {
         profileGrid.innerHTML = `
@@ -84,10 +92,7 @@ function renderModelPage(data) {
     }
 
     initTabs();
-    // タイポ修正：initAudioPlayer -> initPlayer
-    if(typeof initPlayer === 'function') {
-        initPlayer();
-    }
+    if(typeof initPlayer === 'function') initPlayer();
 }
 
 function initTabs() {
@@ -95,20 +100,25 @@ function initTabs() {
     const sections = document.querySelectorAll('.model-section');
 
     tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-            const targetId = tab.getAttribute('data-target');
-            
-            // 全タブ・全セクションのactiveを解除
+        tab.onclick = () => {
+            const targetId = tab.dataset.target;
+
+            // 全てリセット
             tabs.forEach(t => t.classList.remove('active'));
-            sections.forEach(s => s.classList.remove('active'));
-            
-            // クリックした要素をactiveに
+            sections.forEach(s => {
+                s.classList.remove('active');
+                s.style.display = 'none';
+            });
+
+            // ターゲットのみ表示
             tab.classList.add('active');
             const targetSection = document.getElementById(targetId);
             if (targetSection) {
                 targetSection.classList.add('active');
+                // MAINだけはflex、他はblock
+                targetSection.style.display = (targetId === 'sec-main') ? 'flex' : 'block';
             }
             window.scrollTo(0, 0); 
-        });
+        };
     });
 }

@@ -21,7 +21,7 @@
 
     <main>
         <!-- 1. MAIN -->
-        <section id="sec-main" class="model-section active">
+        <section id="sec-main" class="model-section active" style="display: flex;">
             <div class="hero-img-box"><img id="js-hero-img" src=""></div>
             <div class="hero-text-box">
                 <p class="en-title" id="js-title-en"></p>
@@ -29,7 +29,7 @@
             </div>
         </section>
 
-        <!-- 2. ABOUT (ギャラリー統合) -->
+        <!-- 2. ABOUT & VISUALS -->
         <section id="sec-about" class="model-section container">
             <div class="concept-visual">
                 <img id="js-about-img" src="">
@@ -52,7 +52,7 @@
             <h2 class="section-label">VOICE PREVIEW</h2>
             <div class="player-wrapper">
                 <div class="player-display">
-                    <div class="now-playing"><p>NOW PLAYING</p><h4 id="track-title">Select a track</h4></div>
+                    <h4 id="track-title">Select a track</h4>
                     <div class="player-ui">
                         <button id="play-pause-btn">PLAY</button>
                         <input type="range" id="seek-bar" value="0">
@@ -80,15 +80,12 @@
 
     <script src="data.js"></script>
     <script>
-        // プレイヤー機能を先に定義
         function initPlayer() {
             const audio = document.getElementById('audio-element');
             const playBtn = document.getElementById('play-pause-btn');
             const seekBar = document.getElementById('seek-bar');
             const trackTitle = document.getElementById('track-title');
             
-            // プレイリストの各曲に対してクリックイベントを設定
-            // common.jsで生成された後に呼ばれるため、ここで再取得する
             const updateTracks = () => {
                 const tracks = document.querySelectorAll('.track');
                 tracks.forEach(track => {
@@ -102,9 +99,7 @@
                     };
                 });
             };
-            
             updateTracks();
-
             if(playBtn) {
                 playBtn.onclick = () => {
                     if (!audio.src) return;
