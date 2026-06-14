@@ -2,6 +2,7 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -16,24 +17,19 @@
             </div>
         </section>
 
-        <!-- ABOUTセクションの中身を以下のように書き換え -->
-<section id="about">
-    <div class="container">
-        <div class="concept-visual">
-            <img id="js-sacra-img" src="">
-            <div class="concept-text">
-                <h2 class="section-label">ABOUT</h2>
-                <h3>Who is <span class="purple" id="js-en-name"></span>?</h3>
-                <p class="body-text" id="js-about-text"></p>
-                
-                <!-- 詳細プロフィールの追加 -->
-                <div class="info-grid" id="js-profile-info">
-                    <!-- JSでここに流し込みます -->
+        <section id="about">
+            <div class="container">
+                <div class="concept-visual">
+                    <img id="js-sacra-img" src="">
+                    <div class="concept-text">
+                        <h2 class="section-label">ABOUT</h2>
+                        <h3>Who is <span class="purple" id="js-en-name"></span>?</h3>
+                        <p class="body-text" id="js-about-text"></p>
+                        <div class="info-grid" id="js-profile-info"></div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-</section>
+        </section>
 
         <section id="visuals" class="container">
             <h2 class="section-label">VISUALS</h2>
@@ -44,7 +40,7 @@
             <h2 class="section-label">VOICE PREVIEW</h2>
             <div class="player-wrapper">
                 <div class="player-display">
-                    <h4 id="track-title">Select a track</h4>
+                    <div class="now-playing"><p>NOW PLAYING</p><h4 id="track-title">Select a track</h4></div>
                     <div class="player-ui">
                         <button id="play-pause-btn">PLAY</button>
                         <input type="range" id="seek-bar" value="0">
@@ -61,12 +57,19 @@
                 <a id="js-dl-btn" href="" class="btn-dl">DOWNLOAD .pth</a>
             </div>
         </section>
+
+        <section id="guideline" class="container">
+            <h3 class="section-label">GUIDELINE</h3>
+            <div class="terms-content">
+                <p>・RVC以外の目的での使用禁止</p>
+                <p>・特定の個人・団体を誹謗中傷する目的での使用を禁止します</p>
+            </div>
+        </section>
     </main>
     
     <script src="data.js"></script>
     <script src="common.js"></script>
     <script>
-        // プレイヤーの再生ロジック（common.jsから呼ばれる）
         function initPlayer() {
             const audio = document.getElementById('audio-element');
             const playBtn = document.getElementById('play-pause-btn');
@@ -80,11 +83,11 @@
                     track.classList.add('active');
                     audio.src = track.dataset.src;
                     trackTitle.innerText = track.innerText;
-                    audio.play();
-                    playBtn.innerText = 'PAUSE';
+                    audio.play(); playBtn.innerText = 'PAUSE';
                 };
             });
             playBtn.onclick = () => {
+                if (!audio.src) return;
                 if (audio.paused) { audio.play(); playBtn.innerText = 'PAUSE'; }
                 else { audio.pause(); playBtn.innerText = 'PLAY'; }
             };
