@@ -1,39 +1,22 @@
-/* --- 前回の基本設定に加え、トップページ用を追加 --- */
-.portal { text-align: center; padding-top: 150px; }
+.info-grid {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    border-top: 1px solid var(--border-color);
+    padding-top: 20px;
+}
 
-.character-select {
+.info-item {
+    font-size: 0.85rem;
     display: flex;
-    justify-content: center;
-    gap: 40px;
-    margin-top: 50px;
+    flex-direction: column;
 }
 
-.char-card {
-    text-decoration: none;
-    color: inherit;
-    width: 300px;
-    transition: 0.3s;
-}
-
-.char-card img {
-    width: 100%;
-    filter: grayscale(100%);
-    transition: 0.5s;
-    border-bottom: 1px solid var(--border-color);
-}
-
-.char-card:hover img {
-    filter: grayscale(0%);
-    transform: translateY(-10px);
-}
-
-.char-card h3 {
-    margin-top: 20px;
-    letter-spacing: 0.2em;
-}
-
-.char-card p {
-    font-size: 0.8rem;
+.info-item span {
+    font-size: 0.6rem;
     color: var(--main-accent);
-    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    margin-bottom: 5px;
 }
