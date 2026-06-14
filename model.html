@@ -5,68 +5,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body id="js-model-content">
+    <!-- common.js が header を注入します -->
+
+    <div class="sub-nav-wrapper">
+        <ul class="sub-nav">
+            <li class="active" data-target="sec-main">MAIN</li>
+            <li data-target="sec-about">ABOUT</li>
+            <li data-target="sec-visuals">VISUALS</li>
+            <li data-target="sec-voice">VOICE</li>
+            <li data-target="sec-download">DOWNLOAD</li>
+        </ul>
+    </div>
+
     <main>
-        <section id="hero">
-            <div class="hero-left"><img id="js-main-img" src=""></div>
-            <div class="hero-right">
-                <div class="title-area">
-                    <p class="en-title" id="js-en-title"></p>
-                    <h1 class="main-name" id="js-name"></h1>
+        <!-- MAIN -->
+        <section id="sec-main" class="model-section active">
+            <div class="hero-img-box"><img id="js-hero-img" src=""></div>
+            <div class="hero-text-box">
+                <p class="en-title" id="js-title-en"></p>
+                <h1 class="main-name" id="js-title-jp"></h1>
+            </div>
+        </section>
+
+        <!-- ABOUT -->
+        <section id="sec-about" class="model-section container">
+            <div class="concept-visual">
+                <img id="js-about-img" src="">
+                <div class="concept-text">
+                    <h2 class="section-label">ABOUT</h2>
+                    <h3>Who is <span class="purple" id="js-en-name"></span>?</h3>
+                    <p class="body-text" id="js-about-text"></p>
+                    <div class="info-grid" id="js-profile-grid"></div>
                 </div>
             </div>
         </section>
 
-        <section id="about">
-            <div class="container">
-                <div class="concept-visual">
-                    <img id="js-sacra-img" src="">
-                    <div class="concept-text">
-                        <h2 class="section-label">ABOUT</h2>
-                        <h3>Who is <span class="purple" id="js-en-name"></span>?</h3>
-                        <p class="body-text" id="js-about-text"></p>
-                        <div class="info-grid" id="js-profile-info"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="visuals" class="container">
+        <!-- VISUALS -->
+        <section id="sec-visuals" class="model-section container">
             <h2 class="section-label">VISUALS</h2>
-            <div class="gallery-grid" id="js-gallery"></div>
+            <div class="gallery-grid" id="js-gallery-grid"></div>
         </section>
 
-        <section id="voice" class="container">
+        <!-- VOICE -->
+        <section id="sec-voice" class="model-section container">
             <h2 class="section-label">VOICE PREVIEW</h2>
             <div class="player-wrapper">
                 <div class="player-display">
-                    <div class="now-playing"><p>NOW PLAYING</p><h4 id="track-title">Select a track</h4></div>
+                    <h4 id="track-title">Select a track</h4>
                     <div class="player-ui">
                         <button id="play-pause-btn">PLAY</button>
                         <input type="range" id="seek-bar" value="0">
                     </div>
                     <audio id="audio-element"></audio>
                 </div>
-                <ul class="playlist" id="js-playlist"></ul>
+                <ul class="playlist" id="js-song-list"></ul>
             </div>
         </section>
 
-        <section id="download" class="container">
+        <!-- DOWNLOAD -->
+        <section id="sec-download" class="model-section container">
             <div class="dl-box">
                 <h2 class="section-label">DOWNLOAD</h2>
-                <a id="js-dl-btn" href="" class="btn-dl">DOWNLOAD .pth</a>
-            </div>
-        </section>
-
-        <section id="guideline" class="container">
-            <h3 class="section-label">GUIDELINE</h3>
-            <div class="terms-content">
-                <p>・RVC以外の目的での使用禁止</p>
-                <p>・特定の個人・団体を誹謗中傷する目的での使用を禁止します</p>
+                <a id="js-dl-link" href="" class="btn-dl">DOWNLOAD .pth</a>
             </div>
         </section>
     </main>
-    
+
     <script src="data.js"></script>
     <script src="common.js"></script>
     <script>
