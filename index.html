@@ -2,182 +2,22 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>菖蒲カグラ | Ayame Kagura RVC Model</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Noto Sans JP (ゴシック) を読み込み -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;700;900&display=swap" rel="stylesheet">
+    <title>菖蒲家 Ayameke Project</title>
 </head>
 <body>
-
-    <header id="site-header">
-        <div class="header-container">
-            <div class="logo">AYAME KAGURA</div>
-            <!-- ハンバーガーボタン -->
-            <div class="menu-btn" id="menu-btn">
-                <span></span>
-                <span></span>
-            </div>
+    <main class="container portal">
+        <h1 class="section-label">SELECT MODEL</h1>
+        <div class="character-select">
+            <!-- キャラが増えたらここを増やす -->
+            <a href="model.html?id=kagura" class="char-card">
+                <img src="picture/kagura-main.png">
+                <h3>菖蒲カグラ</h3>
+                <p>Ayame Kagura</p>
+            </a>
         </div>
-    </header>
-
-    <!-- 全画面メニュー -->
-    <nav class="nav-overlay" id="nav-overlay">
-        <ul>
-            <li><a href="#hero">TOP</a></li>
-            <li><a href="#concept">ABOUT</a></li>
-            <li><a href="#gallery">VISUALS</a></li>
-            <li><a href="#preview">VOICE</a></li>
-            <li><a href="#download">DOWNLOAD</a></li>
-            <li><a href="#terms">GUIDELINE</a></li>
-        </ul>
-    </nav>
-
-    <main>
-        <!-- ① TOPメイン画面 -->
-        <section id="hero">
-            <div class="hero-left">
-                <img src="picture/kagura-main.png" alt="Ayame Kagura Main">
-            </div>
-            <div class="hero-right">
-                <div class="title-area">
-                    <p class="en-title">ARTIFICIAL SINGING SYNTHESIZER</p>
-                    <h1 class="main-name">菖蒲<span class="purple">カグラ</span></h1>
-                    <p class="jp-sub">音楽的同位体プロジェクト</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- ② 紹介セクション -->
-        <section id="concept">
-            <div class="container">
-                <div class="concept-visual">
-                    <img src="picture/kagura-sacra.png" alt="Sakura and Kagura">
-                    <div class="concept-text">
-                        <h2 class="section-label">ABOUT</h2>
-                        <h3>Who is <span class="purple">KAGURA?</span></h3>
-                        <p class="body-text">
-                            菖蒲カグラは、バーチャルシンガー「菖蒲さくら」の<br>
-                            音楽的同位体として生まれた人工歌唱ソフトウェアです。<br>
-                            制作者本人の声をベースに、AI技術を用いて<br>
-                            その声質・癖・歌い方をリアルに再現します。
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ギャラリー（ID追加） -->
-        <section id="gallery" class="container">
-            <h2 class="section-label">VISUALS</h2>
-            <div class="gallery-grid">
-                <div class="gallery-item"><img src="picture/kagura-main.png"><p>Normal</p></div>
-                <div class="gallery-item"><img src="picture/kagura-twin.png"><p>Twin Tails</p></div>
-                <div class="gallery-item"><img src="picture/kagura-twin2.png"><p>Twin Tails (Close-up)</p></div>
-            </div>
-        </section>
-
-        <!-- プレイヤー（ID追加） -->
-        <section id="preview" class="container">
-            <h2 class="section-label">VOICE PREVIEW</h2>
-            <div class="player-wrapper">
-                <div class="player-display">
-                    <div class="now-playing">
-                        <p>NOW PLAYING</p>
-                        <h4 id="track-title">Select a track</h4>
-                    </div>
-                    <div class="player-ui">
-                        <button id="play-pause-btn">PLAY</button>
-                        <input type="range" id="seek-bar" value="0">
-                    </div>
-                    <audio id="audio-element"></audio>
-                </div>
-                <ul class="playlist">
-                    <li class="track" data-src="music/any-angle.mp3">全方向美少女 - 乃紫</li>
-                    <li class="track" data-src="music/b-list.mp3">B級 - ちゃんみな</li>
-                    <li class="track" data-src="music/dokuzu.mp3">ド屑 - なきそ</li>
-                    <li class="track" data-src="music/domestic.mp3">ドメスティックでバイオレンス - Ado</li>
-                    <li class="track" data-src="music/identity.mp3">アイデンティティ - Kanaria</li>
-                    <li class="track" data-src="music/shadow-shadow.mp3">Shadow Shadow - Azari</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- ダウンロード -->
-        <section id="download" class="container">
-            <div class="dl-box">
-                <span class="label">PRODUCT</span>
-                <h2>RVC Model v1.0</h2>
-                <a href="https://github.com/RBVC/ayameke/releases/download/v1.0.0/Ayame_Kagura.pth" class="btn-dl">DOWNLOAD</a>
-            </div>
-        </section>
-
-        <!-- 規約 -->
-        <section id="terms" class="container">
-            <h3 class="section-label">GUIDELINE</h3>
-            <div class="terms-content">
-                <p>・RVC以外の目的での使用禁止</p>
-                <p>・特定の個人・団体を誹謗中傷する目的での使用を禁止します</p>
-            </div>
-        </section>
     </main>
-
-    <footer>
-        <p>© 2024 AYAMEKE PROJECT / 菖蒲家</p>
-    </footer>
-
-    <script>
-        // メニューの開閉
-        const menuBtn = document.getElementById('menu-btn');
-        const navOverlay = document.getElementById('nav-overlay');
-        const navLinks = document.querySelectorAll('.nav-overlay a');
-
-        menuBtn.addEventListener('click', () => {
-            menuBtn.classList.toggle('active');
-            navOverlay.classList.toggle('active');
-        });
-
-        // リンクをクリックしたらメニューを閉じる
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                menuBtn.classList.remove('active');
-                navOverlay.classList.remove('active');
-            });
-        });
-
-        // プレイヤーの処理 (前回と同じ)
-        const audio = document.getElementById('audio-element');
-        const playBtn = document.getElementById('play-pause-btn');
-        const seekBar = document.getElementById('seek-bar');
-        const trackTitle = document.getElementById('track-title');
-        const tracks = document.querySelectorAll('.track');
-
-        tracks.forEach(track => {
-            track.addEventListener('click', () => {
-                tracks.forEach(t => t.classList.remove('active'));
-                track.classList.add('active');
-                audio.src = track.dataset.src;
-                trackTitle.innerText = track.innerText;
-                audio.play();
-                playBtn.innerText = 'PAUSE';
-            });
-        });
-
-        playBtn.addEventListener('click', () => {
-            if (!audio.src) return;
-            if (audio.paused) { audio.play(); playBtn.innerText = 'PAUSE'; }
-            else { audio.pause(); playBtn.innerText = 'PLAY'; }
-        });
-
-        audio.addEventListener('timeupdate', () => {
-            seekBar.value = (audio.currentTime / audio.duration) * 100 || 0;
-        });
-
-        seekBar.addEventListener('input', () => {
-            audio.currentTime = (seekBar.value / 100) * audio.duration;
-        });
-    </script>
+    <script src="data.js"></script>
+    <script src="common.js"></script>
 </body>
 </html>

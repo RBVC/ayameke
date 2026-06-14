@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main>
+        <section id="hero">
+            <div class="hero-left"><img id="js-main-img" src=""></div>
+            <div class="hero-right">
+                <div class="title-area">
+                    <p class="en-title" id="js-en-title"></p>
+                    <h1 class="main-name" id="js-name"></h1>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <div class="concept-visual">
+                    <img id="js-sacra-img" src="">
+                    <div class="concept-text">
+                        <h2 class="section-label">ABOUT</h2>
+                        <p class="body-text" id="js-about-text"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="visuals" class="container">
+            <h2 class="section-label">VISUALS</h2>
+            <div class="gallery-grid" id="js-gallery"></div>
+        </section>
+
+        <section id="voice" class="container">
+            <h2 class="section-label">VOICE PREVIEW</h2>
+            <div class="player-wrapper">
+                <div class="player-display">
+                    <h4 id="track-title">Select a track</h4>
+                    <div class="player-ui">
+                        <button id="play-pause-btn">PLAY</button>
+                        <input type="range" id="seek-bar" value="0">
+                    </div>
+                    <audio id="audio-element"></audio>
+                </div>
+                <ul class="playlist" id="js-playlist"></ul>
+            </div>
+        </section>
+
+        <section id="download" class="container">
+            <div class="dl-box">
+                <h2 class="section-label">DOWNLOAD</h2>
+                <a id="js-dl-btn" href="" class="btn-dl">DOWNLOAD .pth</a>
+            </div>
+        </section>
+    </main>
+    
+    <script src="data.js"></script>
+    <script src="common.js"></script>
+    <script>
+        // プレイヤーの再生ロジック（common.jsから呼ばれる）
+        function initPlayer() {
+            const audio = document.getElementById('audio-element');
+            const playBtn = document.getElementById('play-pause-btn');
+            const seekBar = document.getElementById('seek-bar');
+            const trackTitle = document.getElementById('track-title');
+            const tracks = document.querySelectorAll('.track');
+
+            tracks.forEach(track => {
+                track.onclick = () => {
+                    tracks.forEach(t => t.classList.remove('active'));
+                    track.classList.add('active');
+                    audio.src = track.dataset.src;
+                    trackTitle.innerText = track.innerText;
+                    audio.play();
+                    playBtn.innerText = 'PAUSE';
+                };
+            });
+            playBtn.onclick = () => {
+                if (audio.paused) { audio.play(); playBtn.innerText = 'PAUSE'; }
+                else { audio.pause(); playBtn.innerText = 'PLAY'; }
+            };
+            audio.ontimeupdate = () => { seekBar.value = (audio.currentTime / audio.duration) * 100 || 0; };
+            seekBar.oninput = () => { audio.currentTime = (seekBar.value / 100) * audio.duration; };
+        }
+    </script>
+</body>
+</html>
