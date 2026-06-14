@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>菖蒲カグラ - Ayame Kagura RVC Model</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>菖蒲カグラ</h1>
+        <p class="subtitle">Ayame Kagura RVC Model Release</p>
+    </header>
+
+    <main class="container">
+        
+        <!-- キャラクター紹介 -->
+        <section class="profile">
+            <div class="character-card">
+                <!-- 立ち絵があれば assets/chara.png に置いてください -->
+                <img src="assets/chara.png" alt="菖蒲カグラ" class="chara-img" onerror="this.src='https://via.placeholder.com/300x400?text=Ayame+Kagura'">
+                <div class="bio">
+                    <h2>Concept</h2>
+                    <p>私の声をベースに生まれた、デジタル・ドッペルゲンガー。</p>
+                    <p>「私であって私ではない、新しい存在」としての声を楽しんでいただければ幸いです。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 視聴セクション -->
+        <section class="preview">
+            <h2>Voice Preview</h2>
+            <div class="audio-grid">
+                <div class="audio-item">
+                    <p>Sample 1 (Normal)</p>
+                    <audio controls src="assets/sample1.wav"></audio>
+                </div>
+                <div class="audio-item">
+                    <p>Sample 2 (Singing)</p>
+                    <audio controls src="assets/sample2.wav"></audio>
+                </div>
+            </div>
+        </section>
+
+        <!-- ダウンロードセクション -->
+        <section class="download">
+            <h2>Download Model</h2>
+            <p>RVC v2 / 48kHz / PTHのみ</p>
+            <!-- ここにGitHub Releasesで取得したリンクを貼ります -->
+            <a href="ここにReleasesのリンクを貼る" class="dl-button">.pth モデルをダウンロード</a>
+            <p class="note">※Indexファイルは含まれていませんが、そのままお使いいただけます。</p>
+        </section>
+
+        <!-- 利用規約 -->
+        <section class="terms">
+            <h2>Terms of Use</h2>
+            <ul>
+                <li>RVC（AI音声変換）以外の目的での使用を禁止します。</li>
+                <li>特定の個人・団体を誹謗中傷する目的での使用を禁止します。</li>
+                <li>商用利用については、作者までお問い合わせください。</li>
+                <li>クレジット表記は任意ですが、あれば喜びます。</li>
+            </ul>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Ayame Kagura Project</p>
+    </footer>
+
+</body>
+</html>
