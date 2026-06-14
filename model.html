@@ -20,7 +20,7 @@
     </div>
 
     <main>
-        <!-- 1. MAIN: ヒーロー画面のみ -->
+        <!-- 1. MAIN -->
         <section id="sec-main" class="model-section active">
             <div class="hero-img-box"><img id="js-hero-img" src=""></div>
             <div class="hero-text-box">
@@ -29,7 +29,7 @@
             </div>
         </section>
 
-        <!-- 2. ABOUT: プロフィール + ビジュアル(ギャラリー) -->
+        <!-- 2. ABOUT (ギャラリー統合) -->
         <section id="sec-about" class="model-section container">
             <div class="concept-visual">
                 <img id="js-about-img" src="">
@@ -37,11 +37,10 @@
                     <h2 class="section-label">ABOUT</h2>
                     <h3>Who is <span class="purple" id="js-en-name"></span>?</h3>
                     <p class="body-text" id="js-about-text"></p>
-                    <div class="info-grid" id="js-profile-info"></div>
+                    <div class="info-grid" id="js-profile-grid"></div>
                 </div>
             </div>
 
-            <!-- ABOUTの下に続くVISUALS -->
             <div class="visual-title">
                 <h2 class="section-label">VISUALS</h2>
             </div>
@@ -53,7 +52,7 @@
             <h2 class="section-label">VOICE PREVIEW</h2>
             <div class="player-wrapper">
                 <div class="player-display">
-                    <h4 id="track-title">Select a track</h4>
+                    <div class="now-playing"><p>NOW PLAYING</p><h4 id="track-title">Select a track</h4></div>
                     <div class="player-ui">
                         <button id="play-pause-btn">PLAY</button>
                         <input type="range" id="seek-bar" value="0">
@@ -80,33 +79,45 @@
     </main>
 
     <script src="data.js"></script>
-    <script src="common.js"></script>
     <script>
-        // プレイヤー再生機能
+        // プレイヤー機能を先に定義
         function initPlayer() {
             const audio = document.getElementById('audio-element');
             const playBtn = document.getElementById('play-pause-btn');
             const seekBar = document.getElementById('seek-bar');
             const trackTitle = document.getElementById('track-title');
-            const tracks = document.querySelectorAll('.track');
-
-            tracks.forEach(track => {
-                track.onclick = () => {
-                    tracks.forEach(t => t.classList.remove('active'));
-                    track.classList.add('active');
-                    audio.src = track.dataset.src;
-                    trackTitle.innerText = track.innerText;
-                    audio.play(); playBtn.innerText = 'PAUSE';
-                };
-            });
-            playBtn.onclick = () => {
-                if (!audio.src) return;
-                if (audio.paused) { audio.play(); playBtn.innerText = 'PAUSE'; }
-                else { audio.pause(); playBtn.innerText = 'PLAY'; }
+            
+            // プレイリストの各曲に対してクリックイベントを設定
+            // common.jsで生成された後に呼ばれるため、ここで再取得する
+            const updateTracks = () => {
+                const tracks = document.querySelectorAll('.track');
+                tracks.forEach(track => {
+                    track.onclick = () => {
+                        tracks.forEach(t => t.classList.remove('active'));
+                        track.classList.add('active');
+                        audio.src = track.dataset.src;
+                        trackTitle.innerText = track.innerText;
+                        audio.play();
+                        if(playBtn) playBtn.innerText = 'PAUSE';
+                    };
+                });
             };
-            audio.ontimeupdate = () => { seekBar.value = (audio.currentTime / audio.duration) * 100 || 0; };
-            seekBar.oninput = () => { audio.currentTime = (seekBar.value / 100) * audio.duration; };
+            
+            updateTracks();
+
+            if(playBtn) {
+                playBtn.onclick = () => {
+                    if (!audio.src) return;
+                    if (audio.paused) { audio.play(); playBtn.innerText = 'PAUSE'; }
+                    else { audio.pause(); playBtn.innerText = 'PLAY'; }
+                };
+            }
+            if(audio && seekBar) {
+                audio.ontimeupdate = () => { seekBar.value = (audio.currentTime / audio.duration) * 100 || 0; };
+                seekBar.oninput = () => { audio.currentTime = (seekBar.value / 100) * audio.duration; };
+            }
         }
     </script>
+    <script src="common.js"></script>
 </body>
 </html>

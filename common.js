@@ -40,40 +40,54 @@ document.addEventListener('DOMContentLoaded', () => {
 function renderModelPage(data) {
     document.title = `${data.nameJP} | AYAMEKE`;
     
-    // MAIN用
-    document.getElementById('js-title-jp').innerHTML = data.nameJP.replace('カグラ', '<span class="purple">カグラ</span>');
-    document.getElementById('js-title-en').innerText = data.enTitle;
-    document.getElementById('js-hero-img').src = data.mainImg;
+    // データ流し込み（IDの存在チェックを入れながら）
+    const nodes = {
+        'js-title-jp': () => document.getElementById('js-title-jp').innerHTML = data.nameJP.replace('カグラ', '<span class="purple">カグラ</span>'),
+        'js-title-en': () => document.getElementById('js-title-en').innerText = data.enTitle,
+        'js-hero-img': () => document.getElementById('js-hero-img').src = data.mainImg,
+        'js-about-img': () => document.getElementById('js-about-img').src = data.sacraImg,
+        'js-about-text': () => document.getElementById('js-about-text').innerText = data.aboutText,
+        'js-en-name': () => document.getElementById('js-en-name').innerText = data.nameEN.split(' ')[1].toUpperCase(),
+        'js-dl-link': () => document.getElementById('js-dl-link').href = data.downloadUrl
+    };
 
-    // ABOUT用
-    document.getElementById('js-about-img').src = data.sacraImg;
-    document.getElementById('js-about-text').innerText = data.aboutText;
-    document.getElementById('js-en-name').innerText = data.nameEN.split(' ')[1].toUpperCase();
-    document.getElementById('js-profile-grid').innerHTML = `
-        <div class="info-item"><span>Birthday</span>${data.profile.birthday}</div>
-        <div class="info-item"><span>Height</span>${data.profile.height}</div>
-        <div class="info-item"><span>Pronoun</span>${data.profile.pronoun}</div>
-        <div class="info-item"><span>Hair</span>${data.appearance.hair}</div>
-        <div class="info-item"><span>Eyes</span>${data.appearance.eyes}</div>
-    `;
+    Object.keys(nodes).forEach(id => { if(document.getElementById(id)) nodes[id](); });
 
-    // VISUALS用（ABOUT内に統合済み）
+    // プロフィール情報
+    const profileGrid = document.getElementById('js-profile-grid');
+    if(profileGrid) {
+        profileGrid.innerHTML = `
+            <div class="info-item"><span>Birthday</span>${data.profile.birthday}</div>
+            <div class="info-item"><span>Height</span>${data.profile.height}</div>
+            <div class="info-item"><span>Pronoun</span>${data.profile.pronoun}</div>
+            <div class="info-item"><span>Hair</span>${data.appearance.hair}</div>
+            <div class="info-item"><span>Eyes</span>${data.appearance.eyes}</div>
+        `;
+    }
+
+    // ギャラリー
     const gal = document.getElementById('js-gallery-grid');
-    data.visuals.forEach(v => {
-        gal.innerHTML += `<div class="gallery-item"><img src="${v.src}"><p>${v.label}</p></div>`;
-    });
+    if(gal) {
+        gal.innerHTML = '';
+        data.visuals.forEach(v => {
+            gal.innerHTML += `<div class="gallery-item"><img src="${v.src}"><p>${v.label}</p></div>`;
+        });
+    }
 
-    // VOICE用
+    // 音声リスト
     const list = document.getElementById('js-song-list');
-    data.songs.forEach(s => {
-        list.innerHTML += `<li class="track" data-src="${s.src}">${s.title}</li>`;
-    });
-
-    // DOWNLOAD用
-    document.getElementById('js-dl-link').href = data.downloadUrl;
+    if(list) {
+        list.innerHTML = '';
+        data.songs.forEach(s => {
+            list.innerHTML += `<li class="track" data-src="${s.src}">${s.title}</li>`;
+        });
+    }
 
     initTabs();
-    if(typeof initPlayer === 'function') initPlayer();
+    // タイポ修正：initAudioPlayer -> initPlayer
+    if(typeof initPlayer === 'function') {
+        initPlayer();
+    }
 }
 
 function initTabs() {
@@ -81,13 +95,20 @@ function initTabs() {
     const sections = document.querySelectorAll('.model-section');
 
     tabs.forEach(tab => {
-        tab.onclick = () => {
-            const target = tab.dataset.target;
+        tab.addEventListener('click', () => {
+            const targetId = tab.getAttribute('data-target');
+            
+            // 全タブ・全セクションのactiveを解除
             tabs.forEach(t => t.classList.remove('active'));
             sections.forEach(s => s.classList.remove('active'));
+            
+            // クリックした要素をactiveに
             tab.classList.add('active');
-            document.getElementById(target).classList.add('active');
+            const targetSection = document.getElementById(targetId);
+            if (targetSection) {
+                targetSection.classList.add('active');
+            }
             window.scrollTo(0, 0); 
-        };
+        });
     });
 }
