@@ -3,90 +3,162 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>菖蒲カグラ - Ayame Kagura RVC Model</title>
+    <title>菖蒲カグラ | Ayame Kagura RVC Model</title>
     <link rel="stylesheet" href="style.css">
+    <!-- Noto Serif JP を読み込み -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <header>
-        <h1>菖蒲カグラ</h1>
-        <p class="subtitle">Ayame Kagura RVC Model Release</p>
+        <div class="logo">AYAME KAGURA</div>
     </header>
 
-    <main class="container">
-        
-        <!-- キャラクター紹介 -->
-        <section class="profile">
-            <div class="character-card">
-                <!-- メイン画像を表示 -->
-                <img src="picture/kagura-main.png" alt="菖蒲カグラ" class="chara-img">
-                <div class="bio">
-                    <h2>Concept</h2>
-                    <p>制作者「菖蒲さくら」の声をベースに生まれた、デジタル・ドッペルゲンガー。</p>
-                    <p>「私であって私ではない、新しい存在」としての声を楽しんでいただければ幸いです。</p>
-                    <p class="note">※画像は正方形で最適化されています</p>
+    <main>
+        <!-- メインビジュアル：さくらとカグラ -->
+        <section id="hero">
+            <div class="hero-image">
+                <img src="picture/kagura-sacra.png" alt="Sakura and Kagura">
+                <div class="hero-overlay"></div>
+                <div class="hero-text">
+                    <p class="en-sub">Musical Isotope Project</p>
+                    <h1>菖蒲カグラ</h1>
                 </div>
             </div>
         </section>
 
-        <!-- 視聴セクション：6曲対応 -->
-        <section class="preview">
-            <h2>Voice Preview (Cover Samples)</h2>
-            <p>RVCモデルによる歌唱デモです。ピッチ変更等の参考にしてください。</p>
-            <div class="audio-grid">
-                <div class="audio-item">
-                    <p class="song-title">全方向美少女 - 乃紫</p>
-                    <audio controls src="music/any-angle.mp3"></audio>
+        <!-- コンセプト -->
+        <section id="concept" class="container">
+            <div class="concept-content">
+                <div class="concept-block left">
+                    <span class="label">Source Voice</span>
+                    <h3>菖蒲さくら</h3>
+                    <p>Sakura : Black Hair / Purple Eyes</p>
                 </div>
-                <div class="audio-item">
-                    <p class="song-title">B級 - ちゃんみな</p>
-                    <audio controls src="music/b-list.mp3"></audio>
+                <div class="concept-divider"></div>
+                <div class="concept-block right">
+                    <span class="label">RVC Model</span>
+                    <h3>菖蒲カグラ</h3>
+                    <p>Kagura : White Hair / Purple Eyes</p>
                 </div>
-                <div class="audio-item">
-                    <p class="song-title">ド屑 - なきそ feat. 歌愛ユキ</p>
-                    <audio controls src="music/dokuzu.mp3"></audio>
+            </div>
+            <p class="description">
+                制作者「菖蒲さくら」の声をベースに生まれた、デジタル・ドッペルゲンガー。<br>
+                「私であって私ではない、新しい存在」としての歌声。
+            </p>
+        </section>
+
+        <!-- ギャラリー：カグラのバリエーション -->
+        <section id="gallery" class="container">
+            <h2 class="section-title">Visuals</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="picture/kagura-main.png" alt="Normal Hair">
+                    <p>Normal</p>
                 </div>
-                <div class="audio-item">
-                    <p class="song-title">ドメスティックでバイオレンス - Ado</p>
-                    <audio controls src="music/domestic.mp3"></audio>
+                <div class="gallery-item">
+                    <img src="picture/kagura-twin.png" alt="Twin Tails">
+                    <p>Twin Tails</p>
                 </div>
-                <div class="audio-item">
-                    <p class="song-title">アイデンティティ - Kanaria</p>
-                    <audio controls src="music/identity.mp3"></audio>
-                </div>
-                <div class="audio-item">
-                    <p class="song-title">Shadow Shadow - Azari</p>
-                    <audio controls src="music/shadow-shadow.mp3"></audio>
+                <div class="gallery-item">
+                    <img src="picture/kagura-twin2.png" alt="Twin Tails Close-up">
+                    <p>Twin Tails (Close-up)</p>
                 </div>
             </div>
         </section>
 
-        <!-- ダウンロードセクション -->
-        <section class="download">
-            <h2>Download Model</h2>
-            <div class="dl-box">
-                <p><strong>Ayame_Kagura.pth</strong> (RVC v2 / 48kHz)</p>
-                <a href="https://github.com/RBVC/ayameke/releases/download/v1.0.0/Ayame_Kagura.pth" class="dl-button">モデルをダウンロード</a>
-                <p class="note">※Indexファイルは含まれていません。</p>
+        <!-- カスタム音楽プレイヤー -->
+        <section id="preview" class="container">
+            <h2 class="section-title">Voice Preview</h2>
+            <div class="player-container">
+                <div class="player-main">
+                    <div class="now-playing">
+                        <p class="playing-label">NOW PLAYING</p>
+                        <h4 id="track-title">Select a track</h4>
+                    </div>
+                    <div class="controls">
+                        <button id="play-pause-btn">PLAY</button>
+                        <input type="range" id="seek-bar" value="0">
+                    </div>
+                    <audio id="audio-element"></audio>
+                </div>
+                <ul class="playlist">
+                    <li class="track" data-src="music/any-angle.mp3">全方向美少女 - 乃紫</li>
+                    <li class="track" data-src="music/b-list.mp3">B級 - ちゃんみな</li>
+                    <li class="track" data-src="music/dokuzu.mp3">ド屑 - なきそ</li>
+                    <li class="track" data-src="music/domestic.mp3">ドメスティックでバイオレンス - Ado</li>
+                    <li class="track" data-src="music/identity.mp3">アイデンティティ - Kanaria</li>
+                    <li class="track" data-src="music/shadow-shadow.mp3">Shadow Shadow - Azari</li>
+                </ul>
             </div>
         </section>
 
-        <!-- 利用規約 -->
-        <section class="terms">
-            <h2>Terms of Use</h2>
-            <ul>
+        <!-- ダウンロード -->
+        <section id="download" class="container">
+            <div class="product-box">
+                <p class="en">RVC Model v1.0</p>
+                <h2>AYAME KAGURA .pth</h2>
+                <a href="https://github.com/RBVC/ayameke/releases/download/v1.0.0/Ayame_Kagura.pth" class="btn-dl">DOWNLOAD</a>
+            </div>
+        </section>
+
+        <!-- 規約 -->
+        <section id="terms" class="container">
+            <h3>Terms of Use</h3>
+            <ul class="terms-list">
                 <li>RVC（AI音声変換）以外の目的での使用を禁止します。</li>
                 <li>特定の個人・団体を誹謗中傷する目的での使用を禁止します。</li>
-                <li>政治・宗教・公序良俗に反する使用を禁止します。</li>
-                <li>クレジット表記は任意ですが、あれば喜びます。</li>
+                <li>商用利用については作者までお問い合わせください。</li>
+                <li>クレジット表記は任意です。</li>
             </ul>
         </section>
-
     </main>
 
     <footer>
-        <p>&copy; 2024 Ayame Kagura Project / 菖蒲家</p>
+        <p>© 2024 AYAMEKE PROJECT / 菖蒲家</p>
     </footer>
 
+    <script>
+        const audio = document.getElementById('audio-element');
+        const playBtn = document.getElementById('play-pause-btn');
+        const seekBar = document.getElementById('seek-bar');
+        const trackTitle = document.getElementById('track-title');
+        const tracks = document.querySelectorAll('.track');
+
+        tracks.forEach(track => {
+            track.addEventListener('click', () => {
+                tracks.forEach(t => t.classList.remove('active'));
+                track.classList.add('active');
+                
+                audio.src = track.dataset.src;
+                trackTitle.innerText = track.innerText;
+                audio.play();
+                playBtn.innerText = 'PAUSE';
+            });
+        });
+
+        playBtn.addEventListener('click', () => {
+            if (!audio.src) return;
+            if (audio.paused) {
+                audio.play();
+                playBtn.innerText = 'PAUSE';
+            } else {
+                audio.pause();
+                playBtn.innerText = 'PLAY';
+            }
+        });
+
+        audio.addEventListener('timeupdate', () => {
+            const progress = (audio.currentTime / audio.duration) * 100;
+            seekBar.value = progress || 0;
+        });
+
+        seekBar.addEventListener('input', () => {
+            const time = (seekBar.value / 100) * audio.duration;
+            audio.currentTime = time;
+        });
+    </script>
 </body>
 </html>
